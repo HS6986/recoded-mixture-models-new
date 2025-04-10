@@ -1,14 +1,19 @@
 # libraries
 library("Biostrings")
 
-args = commandArgs(trailingOnly=TRUE)
+#args = commandArgs(trailingOnly=TRUE)
+args = c("Dataset.fasta")
 ali_fn = args[1]
 
 # read alignment
-ali   = Biostrings::readAAMultipleAlignment(ali_fn)
+ali = Biostrings::readAAMultipleAlignment(ali_fn)
 
 # recoding dictionaries
 recoding_dictionary = list(
+  "Hp" = list(
+    "0" = "ACFGILMVW",
+    "1" = "DEHKNPQRSTY"
+  ),
   "SR4" = list(
     "A" = "AGNPST",
     "C" = "CHWY",
@@ -53,6 +58,7 @@ recoding_dictionary = list(
 )
 
 # references:
+# Hp: N. Lartillot, S. Blanquart, T, Lepage, PhyloBayes 3.3 a Bayesian software for phylogenetic reconstruction and molecular dating using mixture models. http://www.atgc-montpellier.fr/download/binaries/phylobayes/phylobayes3.3.pdf
 # Dayhoff6: M.O. Dayhoff, R.M. Schwartz, B.C. Orcutt, A model of evolutionary change in proteins
 # Dayhoff9: Alexandra M Hernandez, Joseph F Ryan,  Six-State Amino Acid Recoding is not an Effective Strategy to Offset Compositional Heterogeneity and Saturation in Phylogenetic Analyses
 # SR6: On reduced amino acid alphabets for phylogenetic inference, Mol. Biol. Evol., 24 (2007), pp. 2139-2150
@@ -78,7 +84,7 @@ for (dic in names(recoding_dictionary)) {
   ali_r = Biostrings::chartr(old = "N", new = "-", x = ali_r)
   
   # save as string set
-  ali_r = Biostrings::AAStringSet(ali_r)
+  ali_r = Biostrings::BStringSet(ali_r)
   
   # save as fasta
   Biostrings::writeXStringSet(ali_r, filepath = out_fn)
