@@ -1,6 +1,6 @@
 # Recoded protein mixture models for IQ-TREE
 
-**This repository is currently under construction.**
+**This repository is currently under construction. Please use the original repository ([xgrau/recoded-mixture-models](https://github.com/xgrau/recoded-mixture-models)) instead.**
 
 ---
 This repository contains protein mixture models for some common amino-acid recoding schemes (Dayhoff6, Dayhoff9, SR4, SR6, KGB6) in `nexus` format for use in IQ-TREE.
